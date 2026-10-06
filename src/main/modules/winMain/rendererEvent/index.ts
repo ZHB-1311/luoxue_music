@@ -5,6 +5,8 @@ import app, { sendConfigChange } from './app'
 import hotKey from './hotKey'
 import userApi from './userApi'
 import sync from './sync'
+import account from './account'
+import score from './score'
 import data from './data'
 import music from './music'
 import download from './download'
@@ -16,6 +18,7 @@ export * from './app'
 export * from './hotKey'
 export * from './userApi'
 export * from './sync'
+export * from './account'
 export * from './process'
 
 let isInitialized = false
@@ -30,6 +33,8 @@ export default () => {
   hotKey()
   userApi()
   sync()
+  account()
+  score()
   data()
   music()
   download()

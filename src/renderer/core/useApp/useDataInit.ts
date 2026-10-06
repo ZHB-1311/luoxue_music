@@ -2,6 +2,7 @@ import { getPlayInfo } from '@renderer/utils/ipc'
 import music from '@renderer/utils/musicSdk'
 import { log } from '@common/utils'
 import { getListMusics, getUserLists, registerAction } from '@renderer/store/list/action'
+import { initAccount } from '@renderer/store/account'
 
 
 import useInitUserApi from './useInitUserApi'
@@ -47,6 +48,7 @@ export default () => {
       log.error(err)
     })
     void music.init() // 初始化音乐sdk
+    initAccount() // 初始化音乐账号状态
     unregister = registerAction((ids) => {
       window.app_event.myListUpdate(ids)
     })

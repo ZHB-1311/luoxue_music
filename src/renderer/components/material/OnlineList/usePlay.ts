@@ -15,9 +15,6 @@ export default ({ selectedList, props, removeAllSelect, emit }: {
   removeAllSelect: () => void
   emit: (event: 'show-menu' | 'play-list' | 'togglePage', ...args: any[]) => void
 }) => {
-  let clickTime = 0
-  let clickIndex = -1
-
   const handlePlayMusic = async(index: number, single: boolean) => {
     let targetSong = props.list[index]
     const defaultListMusics = await getListMusics(defaultList.id)
@@ -42,27 +39,18 @@ export default ({ selectedList, props, removeAllSelect, emit }: {
     }
   }
 
-  const doubleClickPlay = (index: number) => {
-    if (
-      window.performance.now() - clickTime > 400 ||
-      clickIndex !== index
-    ) {
-      clickTime = window.performance.now()
-      clickIndex = index
-      return
-    }
+  // 单击歌曲即播放
+  const clickPlay = (index: number) => {
     if (appSetting['list.isClickPlayList']) {
       emit('play-list', index)
     } else {
       void handlePlayMusic(index, true)
     }
-    clickTime = 0
-    clickIndex = -1
   }
 
   return {
     handlePlayMusic,
     handlePlayMusicLater,
-    doubleClickPlay,
+    clickPlay,
   }
 }

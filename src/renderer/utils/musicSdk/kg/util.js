@@ -20,6 +20,18 @@ export const signatureParams = (params, platform = 'android', body = '') => {
 }
 
 /**
+ * 对象参数签名（账号相关接口使用，算法与 signatureParams 一致，支持 POST body 参与签名）
+ * @param {*} params 参数对象
+ * @param {*} platform android / web
+ * @param {*} body POST body 的 JSON 字符串
+ */
+export const signatureKgParams = (params, platform = 'android', body = '') => {
+  let keyparam = platform === 'web' ? 'NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt' : 'OIlwieks28dk2k092lksi2UIkp'
+  let param_list = Object.keys(params).map(key => `${key}=${typeof params[key] === 'object' ? JSON.stringify(params[key]) : params[key]}`).sort()
+  return toMD5(`${keyparam}${param_list.join('')}${body}${keyparam}`)
+}
+
+/**
  * 创建一个适用于KG的Http请求
  * @param {*} url
  * @param {*} options

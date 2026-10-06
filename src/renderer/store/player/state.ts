@@ -38,6 +38,8 @@ export const isShowPlayerDetail = ref(false)
 
 export const isShowPlayComment = ref(false)
 
+export const isShowPlayScore = ref(false)
+
 export const isShowLrcSelectContent = ref(false)
 
 export const playMusicInfo = shallowReactive<{

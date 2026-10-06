@@ -682,6 +682,56 @@ declare global {
       'openAPI.bindLan': boolean
 
       /**
+       * 曲谱-默认乐器
+       */
+      'score.defaultInstrument': LX.Score.Instrument
+
+      /**
+       * 曲谱-谱面布局
+       */
+      'score.scoreLayout': LX.Score.Layout
+
+      /**
+       * 曲谱-音符颜色
+       */
+      'score.noteColor': string
+
+      /**
+       * 曲谱-已播放音符颜色
+       */
+      'score.notePlayedColor': string
+
+      /**
+       * 曲谱-网格线颜色
+       */
+      'score.gridLineColor': string
+
+      /**
+       * 曲谱-背景颜色
+       */
+      'score.bgColor': string
+
+      /**
+       * 曲谱-谱面字号缩放（百分比）
+       */
+      'score.fontScale': number
+
+      /**
+       * 曲谱-是否显示音名
+       */
+      'score.showNoteName': boolean
+
+      /**
+       * 曲谱-切歌时自动生成
+       */
+      'score.autoGenerate': boolean
+
+      /**
+       * 曲谱-精度档位
+       */
+      'score.quality': LX.Score.Quality
+
+      /**
        * 是否在离开搜索界面时自动清空搜索框
        */
       'odc.isAutoClearSearchInput': boolean

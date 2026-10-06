@@ -809,6 +809,37 @@ export const removeSyncServerDevice = (clientId: string) => {
   return rendererInvoke<string>(WIN_MAIN_RENDERER_EVENT_NAME.sync_remove_server_device, clientId)
 }
 
+/**
+ * 接收账号事件（登录状态推送）
+ * @param listener
+ * @returns
+ */
+export const onAccountAction = (listener: LX.IpcRendererEventListenerParams<LX.Account.MainWindowActions>): RemoveListener => {
+  rendererOn(WIN_MAIN_RENDERER_EVENT_NAME.account_action, listener)
+  return () => {
+    rendererOff(WIN_MAIN_RENDERER_EVENT_NAME.account_action, listener)
+  }
+}
+
+/**
+ * 发送账号事件
+ * @param action
+ * @returns
+ */
+export const sendAccountAction = async(action: LX.Account.ServiceActions) => {
+  return rendererInvoke<LX.Account.ServiceActions, LX.Account.Status | undefined>(WIN_MAIN_RENDERER_EVENT_NAME.account_action, action)
+}
+
+
+/**
+ * 发送曲谱事件（取音频/缓存读写）
+ * @param action
+ * @returns
+ */
+export const sendScoreAction = async(action: LX.Score.ServiceActions) => {
+  return rendererInvoke<LX.Score.ServiceActions, any>(WIN_MAIN_RENDERER_EVENT_NAME.score_action, action)
+}
+
 
 // export const refreshSyncCode = async(): Promise<string> => {
 //   return rendererInvoke(WIN_MAIN_RENDERER_EVENT_NAME.sync_generate_code)

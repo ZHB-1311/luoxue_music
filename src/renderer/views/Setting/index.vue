@@ -56,10 +56,12 @@ import SettingBasic from './components/SettingBasic.vue'
 import SettingPlay from './components/SettingPlay.vue'
 import SettingPlayDetail from './components/SettingPlayDetail.vue'
 import SettingDesktopLyric from './components/SettingDesktopLyric.vue'
+import SettingScore from './components/SettingScore.vue'
 import SettingSearch from './components/SettingSearch.vue'
 import SettingList from './components/SettingList.vue'
 import SettingDownload from './components/SettingDownload.vue'
 import SettingSync from './components/SettingSync/index.vue'
+import SettingAccount from './components/SettingAccount/index.vue'
 import SettingOpenAPI from './components/SettingOpenAPI.vue'
 import SettingHotKey from './components/SettingHotKey.vue'
 import SettingNetwork from './components/SettingNetwork.vue'
@@ -76,10 +78,12 @@ export default {
     SettingPlay,
     SettingPlayDetail,
     SettingDesktopLyric,
+    SettingScore,
     SettingSearch,
     SettingList,
     SettingDownload,
     SettingSync,
+    SettingAccount,
     SettingOpenAPI,
     SettingHotKey,
     SettingNetwork,
@@ -101,11 +105,13 @@ export default {
         { id: 'SettingPlay', title: t('setting__play') },
         { id: 'SettingPlayDetail', title: t('setting__play_detail') },
         { id: 'SettingDesktopLyric', title: t('setting__desktop_lyric') },
+        { id: 'SettingScore', title: t('setting__score') },
         { id: 'SettingSearch', title: t('setting__search') },
         { id: 'SettingList', title: t('setting__list') },
         { id: 'SettingDownload', title: t('setting__download') },
         { id: 'SettingHotKey', title: t('setting__hot_key') },
         { id: 'SettingSync', title: t('setting__sync') },
+        { id: 'SettingAccount', title: t('setting__account') },
         { id: 'SettingOpenAPI', title: t('setting__open_api') },
         { id: 'SettingNetwork', title: t('setting__network') },
         { id: 'SettingOdc', title: t('setting__odc') },

@@ -70,6 +70,7 @@ export default ({ props, listRef }: {
   }
   const keyEvent = useKeyEvent({ handleSelectAllData, listRef })
 
+  // 返回是否处于多选操作（Shift/Ctrl），多选时不触发单击播放
   const handleSelectData = (clickIndex: number) => {
     if (keyEvent.isShiftDown) {
       if (selectedList.value.length) {
@@ -90,6 +91,7 @@ export default ({ props, listRef }: {
         selectedList.value.push(props.list[clickIndex])
         lastSelectIndex = clickIndex
       }
+      return true
     } else if (keyEvent.isModDown) {
       lastSelectIndex = clickIndex
       let item = props.list[clickIndex]
@@ -99,9 +101,11 @@ export default ({ props, listRef }: {
       } else {
         selectedList.value.splice(index, 1)
       }
+      return true
     } else if (selectedList.value.length) {
       removeAllSelect()
     }
+    return false
   }
 
   watch(() => props.list, removeAllSelect)

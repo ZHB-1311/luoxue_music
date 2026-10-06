@@ -6,7 +6,7 @@ transition(enter-active-class="animated slideInRight" leave-active-class="animat
     //- div(:class="$style.bg2")
     ControlBtnsLeftHeader(v-if="appSetting['common.controlBtnPosition'] == 'left'")
     ControlBtnsRightHeader(v-else)
-    div(:class="[$style.main, {[$style.showComment]: isShowPlayComment}]")
+    div(:class="[$style.main, {[$style.showComment]: isShowPlayComment, [$style.showScore]: isShowPlayScore}]")
       div.left(:class="$style.left")
         //- div(:class="$style.info")
         div(:class="$style.info")
@@ -19,6 +19,7 @@ transition(enter-active-class="animated slideInRight" leave-active-class="animat
       transition(enter-active-class="animated fadeIn" leave-active-class="animated fadeOut")
         LyricPlayer(v-if="visibled")
       music-comment(v-if="visibled" :class="$style.comment" :show="isShowPlayComment" :music-info="playMusicInfo.musicInfo" @close="hideComment")
+      ScoreView(v-if="visibled" :class="$style.score" @close="hideScore")
     transition(enter-active-class="animated fadeIn" leave-active-class="animated fadeOut")
       play-bar(v-if="visibled")
     transition(enter-active-class="animated-slow fadeIn" leave-active-class="animated-slow fadeOut")
@@ -32,17 +33,20 @@ import { isFullscreen } from '@renderer/store'
 import {
   isShowPlayerDetail,
   isShowPlayComment,
+  isShowPlayScore,
   musicInfo,
   playMusicInfo,
 } from '@renderer/store/player/state'
 import {
   setShowPlayerDetail,
   setShowPlayComment,
+  setShowPlayScore,
   setShowPlayLrcSelectContentLrc,
 } from '@renderer/store/player/action'
 import LyricPlayer from './LyricPlayer.vue'
 import PlayBar from './PlayBar.vue'
 import MusicComment from './components/MusicComment/index.vue'
+import ScoreView from './components/ScoreView/index.vue'
 import ControlBtnsLeftHeader from './ControlBtnsLeftHeader.vue'
 import ControlBtnsRightHeader from './ControlBtnsRightHeader.vue'
 import { registerAutoHideMounse, unregisterAutoHideMounse } from './autoHideMounse'
@@ -57,6 +61,7 @@ export default {
     LyricPlayer,
     PlayBar,
     MusicComment,
+    ScoreView,
   },
   setup() {
     const visibled = ref(false)
@@ -79,6 +84,10 @@ export default {
       setShowPlayComment(false)
     }
 
+    const hideScore = () => {
+      setShowPlayScore(false)
+    }
+
     const handleAfterEnter = () => {
       if (isFullscreen.value) registerAutoHideMounse()
 
@@ -88,6 +97,7 @@ export default {
     const handleAfterLeave = () => {
       setShowPlayLrcSelectContentLrc(false)
       hideComment(false)
+      hideScore()
       visibled.value = false
 
       unregisterAutoHideMounse()
@@ -103,10 +113,12 @@ export default {
       playMusicInfo,
       isShowPlayerDetail,
       isShowPlayComment,
+      isShowPlayScore,
       musicInfo,
       hide,
       handleContextMenu,
       hideComment,
+      hideScore,
       handleAfterEnter,
       handleAfterLeave,
       visibled,
@@ -228,6 +240,25 @@ export default {
       }
     }
   }
+
+  &.showScore {
+    :global {
+      .left {
+        flex-basis: 18%;
+        .description p {
+          font-size: 12px;
+        }
+      }
+      .right {
+        flex-basis: 27%;
+      }
+      .score {
+        opacity: 1;
+        transform: scaleX(1);
+        pointer-events: auto;
+      }
+    }
+  }
 }
 .left {
   flex: 0 0 40%;
@@ -276,6 +307,20 @@ export default {
   opacity: 1;
   margin-left: 10px;
   transform: scaleX(0);
+}
+
+.score {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  margin-left: 10px;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: right center;
+  pointer-events: none;
+  transition: transform @transition-normal, opacity @transition-normal;
 }
 
 

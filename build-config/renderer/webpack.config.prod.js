@@ -46,6 +46,20 @@ module.exports = merge(baseConfig, {
           from: path.join(__dirname, '../../src/static'),
           to: path.join(__dirname, '../../dist/static'),
         },
+        // alphaTab 运行时静态资源（曲谱生成）：字体供 @font-face 加载，
+        // min.js 供其内部 Worker importScripts 使用（打包后 file:// 路径）
+        {
+          from: path.join(__dirname, '../../node_modules/@coderline/alphatab/dist/font/Bravura.woff2'),
+          to: path.join(__dirname, '../../dist/alphaTab/font/Bravura.woff2'),
+        },
+        {
+          from: path.join(__dirname, '../../node_modules/@coderline/alphatab/dist/font/Bravura.woff'),
+          to: path.join(__dirname, '../../dist/alphaTab/font/Bravura.woff'),
+        },
+        {
+          from: path.join(__dirname, '../../node_modules/@coderline/alphatab/dist/alphaTab.min.js'),
+          to: path.join(__dirname, '../../dist/alphaTab/alphaTab.min.js'),
+        },
       ],
     }),
     new webpack.DefinePlugin({

@@ -132,6 +132,8 @@ const modules = {
 
     open_api_action: 'open_api_action',
     sync_action: 'sync_action',
+    account_action: 'account_action',
+    score_action: 'score_action',
     sync_get_server_devices: 'sync_get_server_devices',
     sync_remove_server_device: 'sync_remove_server_device',
 

@@ -40,6 +40,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new ESLintPlugin(),
+    // 内嵌的 kugou-api 为第三方上游代码（MIT），保持原样不参与 lint
+    new ESLintPlugin({
+      exclude: ['node_modules', 'src/main/modules/account/kugou-api'],
+    }),
   ],
 }

@@ -149,6 +149,17 @@ const defaultSetting: LX.AppSetting = {
   'openAPI.port': '23330',
   'openAPI.bindLan': false,
 
+  'score.defaultInstrument': 'piano',
+  'score.scoreLayout': 'aligned',
+  'score.noteColor': 'rgba(57, 203, 255, 1)',
+  'score.notePlayedColor': 'rgba(7, 197, 86, 1)',
+  'score.gridLineColor': 'rgba(128, 128, 128, 0.35)',
+  'score.bgColor': 'rgba(0, 0, 0, 0)',
+  'score.fontScale': 100,
+  'score.showNoteName': false,
+  'score.autoGenerate': false,
+  'score.quality': 'standard',
+
   // 'theme.id': 'blue_plus',
   'theme.id': 'green',
   'theme.lightId': 'green',

@@ -48,6 +48,7 @@ import {
   isPlay,
   isShowLrcSelectContent,
   isShowPlayComment,
+  isShowPlayScore,
   musicInfo as playerMusicInfo,
   playMusicInfo,
 } from '@renderer/store/player/state'
@@ -87,7 +88,7 @@ export default {
 
     const dom_lrc_select_content = useSelectAllLrc()
 
-    watch([isFullscreen, isShowPlayComment], () => {
+    watch([isFullscreen, isShowPlayComment, isShowPlayScore], () => {
       setTimeout(handleScrollLrc, 400)
     })
 
@@ -141,7 +142,7 @@ export default {
       let size = appSetting['playDetail.style.fontSize'] / 100
       if (isFullscreen.value) size = size *= 1.4
       return {
-        '--playDetail-lrc-font-size': (isShowPlayComment.value ? size * 0.82 : size) + 'rem',
+        '--playDetail-lrc-font-size': ((isShowPlayComment.value || isShowPlayScore.value) ? size * 0.82 : size) + 'rem',
       }
     })
 

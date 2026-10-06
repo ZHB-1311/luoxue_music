@@ -160,7 +160,7 @@ export default {
     const {
       handlePlayMusic,
       handlePlayMusicLater,
-      doubleClickPlay,
+      clickPlay,
     } = usePlay({ selectedList, props, removeAllSelect, emit })
 
     const {
@@ -205,8 +205,9 @@ export default {
 
     const handleListItemClick = (event, index) => {
       if (rightClickSelectedIndex.value > -1) return
-      handleSelectData(index)
-      doubleClickPlay(index)
+      // Shift/Ctrl 多选时不触发播放
+      if (handleSelectData(index)) return
+      clickPlay(index)
     }
     const handleListItemRightClick = (event, index) => {
       rightClickSelectedIndex.value = index

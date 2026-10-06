@@ -30,6 +30,16 @@ export const createDownloadWorker = () => {
   return Comlink.wrap<LX.WorkerDownloadTypes>(worker)
 }
 
+export type ScoreTypes = Comlink.Remote<LX.WorkerScoreTypes>
+export const createScoreWorker = () => {
+  const worker: Worker = new Worker(new URL(
+    /* webpackChunkName: 'renderer.score.worker' */
+    '../score',
+    import.meta.url,
+  ))
+  return Comlink.wrap<LX.WorkerScoreTypes>(worker)
+}
+
 export const proxyCallback = <Args extends any[]>(callback: (...T: Args) => void) => {
   return Comlink.proxy(callback)
 }

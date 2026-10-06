@@ -29,6 +29,11 @@ const winEvent = () => {
     browserWindow = null
   })
 
+  // 阻止用户拖拽边缘/系统手势拉伸窗口（仅拦截用户手动调整，setBounds 等程序化调整不受影响）
+  browserWindow.on('will-resize', event => {
+    event.preventDefault()
+  })
+
   // browserWindow.on('restore', () => {
   //   browserWindow.webContents.send('restore')
   // })
@@ -113,6 +118,8 @@ export const createWindow = () => {
     },
   }
   if (global.envParams.cmdParams.dt) options.backgroundColor = theme.colors['--color-primary-light-1000']
+  // Windows 下无边框窗口默认带 WS_THICKFRAME 样式，会允许用户拖拽边缘拉伸窗口，这里移除
+  if (isWin && !global.envParams.cmdParams.dt) options.thickFrame = false
   if (global.lx.appSetting['common.startInFullscreen']) {
     options.fullscreen = true
     if (isLinux) options.resizable = true

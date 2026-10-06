@@ -7,6 +7,7 @@ import {
   statusText,
   isShowPlayerDetail,
   isShowPlayComment,
+  isShowPlayScore,
   isShowLrcSelectContent,
   playInfo,
   playMusicInfo,
@@ -63,6 +64,12 @@ export const setShowPlayerDetail = (val: boolean) => {
 
 export const setShowPlayComment = (val: boolean) => {
   isShowPlayComment.value = val
+  if (val) isShowPlayScore.value = false
+}
+
+export const setShowPlayScore = (val: boolean) => {
+  isShowPlayScore.value = val
+  if (val) isShowPlayComment.value = false
 }
 
 export const setShowPlayLrcSelectContentLrc = (val: boolean) => {
